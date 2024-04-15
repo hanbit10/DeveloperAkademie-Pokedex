@@ -1,0 +1,22 @@
+#pokeDexes {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#pokeDex {
+  width: 180px;
+  min-height: 200px;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(0, 255, 255, 0.411);
+  padding: 8px;
+  margin: 8px;
+  border-radius: 15px;
+}
+
+#pokeImg {
+  width: 30%;
+  aspect-ratio: 1/1;
+  background-color: bisque;
+}
