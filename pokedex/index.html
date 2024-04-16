@@ -3,11 +3,76 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="./script.js"></script>
+
     <title>Document</title>
-    <link rel="stylesheet" href="./style.css" />
+    <style>
+      body {
+        position: relative;
+        margin: 0;
+      }
+
+      #poke-dexes {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .pokeDex {
+        position: relative;
+        width: 280px;
+        min-height: 200px;
+        display: flex;
+        justify-content: space-between;
+        background-color: rgba(0, 255, 255, 0.411);
+        padding: 8px;
+        margin: 8px;
+        border-radius: 15px;
+        cursor: pointer;
+      }
+
+      #pokeImg {
+        width: 70%;
+        aspect-ratio: 1/1;
+      }
+
+      .full-dex-container {
+        position: sticky;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(168, 73, 73, 0.685);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #full-dex {
+        position: relative;
+        width: 600px;
+        height: 800px;
+        background-color: rgb(218, 218, 218);
+      }
+
+      .d-none {
+        display: none;
+      }
+    </style>
   </head>
   <body onload="init()">
-    <div id="pokeDexes"></div>
+    <div id="poke-dexes"></div>
+    <div id="full-dex-container" class="full-dex-container d-none">
+      <div id="full-dex">
+        <div id="full-dex-type"></div>
+        <img id="full-dex-img" src="" alt="" />
+        <h2>Po</h2>
+        <div id="full-dex-status"></div>
+        <div id="full-dex-abilities"></div>
+        <div id="full-dex-about"></div>
+      </div>
+    </div>
+    <script src="./script.js"></script>
   </body>
 </html>
