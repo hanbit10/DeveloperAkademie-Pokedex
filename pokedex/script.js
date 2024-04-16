@@ -23,25 +23,49 @@ function init() {
   fetchAllPokemon();
 }
 
-function fetchAllPokemon() {
+// function fetchAllPokemon() {
+//   let url = "https://pokeapi.co/api/v2/pokemon?limit=100";
+//   fetch(url)
+//     .then((response) => response.json())
+//     .then(function (allpokemon) {
+//       allpokemon.results.forEach(function (pokemon) {
+//         fetchPokemonData(pokemon);
+//       });
+//     });
+// }
+
+// function fetchPokemonData(pokemon) {
+//   let url = pokemon.url;
+//   fetch(url)
+//     .then((response) => response.json())
+//     .then(function (pokeData) {
+//       renderPokemon(pokeData);
+//       allPokemon.push(pokeData);
+//     });
+// }
+
+async function fetchAllPokemon() {
   let url = "https://pokeapi.co/api/v2/pokemon?limit=100";
-  fetch(url)
-    .then((response) => response.json())
-    .then(function (allpokemon) {
-      allpokemon.results.forEach(function (pokemon) {
-        fetchPokemonData(pokemon);
-      });
+  try {
+    let response = await fetch(url);
+    let allpokemon = await response.json();
+    allpokemon.results.forEach(function (pokemon) {
+      fetchPokemonData(pokemon);
     });
+  } catch (e) {
+    console.log("Fehler");
+  }
 }
 
-function fetchPokemonData(pokemon) {
+async function fetchPokemonData(pokemon) {
   let url = pokemon.url;
-  fetch(url)
-    .then((response) => response.json())
-    .then(function (pokeData) {
-      renderPokemon(pokeData);
-      allPokemon.push(pokeData);
-    });
+  try {
+    let response = await fetch(url);
+    allPokemon = await response.json();
+    renderPokemon(allPokemon);
+  } catch (e) {
+    console.log("again Fehler");
+  }
 }
 
 function renderPokemon(pokeData) {
