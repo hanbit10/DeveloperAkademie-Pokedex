@@ -17,6 +17,15 @@ const colorMap = {
   ground: "#ca8179",
 };
 
+const chartColor = [
+  "rgba(255, 99, 132, 0.7)",
+  "rgba(255, 159, 64, 0.7)",
+  "rgba(255, 205, 86, 0.7)",
+  "rgba(75, 192, 192, 0.7)",
+  "rgba(54, 162, 235, 0.7)",
+  "rgba(153, 102, 255, 0.7)",
+];
+
 let allPokemon = [];
 
 function init() {
@@ -104,9 +113,9 @@ function getFullDex(pokeId) {
       getFullDexName(allPokemon[i]);
       getFullDexType(allPokemon[i]);
       console.log(allPokemon[i]);
-      getFullDexStatus(allPokemon[i]);
       getFullDexAbilities(allPokemon[i]);
       getFullDexAbout(allPokemon[i]);
+      getChart(allPokemon[i]);
     }
   }
 }
@@ -166,4 +175,35 @@ function getFullDexAbout(pokeData) {
   <div>${pokeWeight}</div>
   <div>${pokeHeight}</div>
   `;
+}
+
+function getChart(pokeData) {
+  const ctx = document.getElementById("myChart");
+  let stats = [];
+  for (let i = 0; i < pokeData["stats"].length; i++) {
+    stats.push(pokeData["stats"][i]["base_stat"]);
+  }
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: ["HP", "Attack", "Defense", "S. Attack", "S. Defense", "Speed"],
+      datasets: [
+        {
+          label: "Stats",
+          data: stats,
+          backgroundColor: chartColor,
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        x: {
+          beginAtZero: true,
+          max: 150,
+        },
+      },
+      indexAxis: "y",
+    },
+  });
 }
