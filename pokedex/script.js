@@ -61,10 +61,11 @@ async function fetchPokemonData(pokemon) {
   let url = pokemon.url;
   try {
     let response = await fetch(url);
-    allPokemon = await response.json();
-    renderPokemon(allPokemon);
+    let allpokemon = await response.json();
+    allPokemon.push(allpokemon);
+    renderPokemon(allpokemon);
   } catch (e) {
-    console.log("again Fehler");
+    console.log("again Fehler", e);
   }
 }
 
@@ -108,6 +109,8 @@ function getPokeImage(pokeData) {
 function getFullDex(pokeId) {
   let fullDexContainer = document.getElementById("full-dex-container");
   let fullDexImg = document.getElementById("full-dex-img");
+  console.log(pokeId);
+  console.log(allPokemon);
 
   for (let i = 0; i < allPokemon.length; i++) {
     if (allPokemon[i]["id"] == pokeId) {
