@@ -9,10 +9,10 @@ const colorMap = {
   psychic: "#9f5bba",
   poison: "#9f5bba",
   electric: "#ffce4b",
-  normal: "#e8e8e8",
-  ghost: "#e8e8e8",
-  fairy: "#e8e8e8",
-  steel: "#e8e8e8",
+  normal: "#808080",
+  ghost: "#808080",
+  fairy: "#808080",
+  steel: "#808080",
   rock: "#ca8179",
   ground: "#ca8179",
 };
@@ -24,7 +24,7 @@ function init() {
 }
 
 async function fetchAllPokemon() {
-  let url = "https://pokeapi.co/api/v2/pokemon?limit=100";
+  let url = "https://pokeapi.co/api/v2/pokemon?limit=10";
   try {
     let response = await fetch(url);
     let allpokemon = await response.json();
@@ -54,6 +54,11 @@ function renderPokemon(pokeData) {
 }
 
 function getDexPokemon(pokeData) {
+  getDexCard(pokeData);
+  getDexTypes(pokeData);
+}
+
+function getDexCard(pokeData) {
   let pokeDexes = document.getElementById("poke-dexes");
   pokeDexes.innerHTML += /*html*/ `
   <div onclick='getFullDex(${pokeData["id"]})' id="pokeDex${pokeData["id"]}" class="pokeDex">
@@ -64,12 +69,14 @@ function getDexPokemon(pokeData) {
     </div>
     <img id="pokeImg" src="${getPokeImage(pokeData)}" alt="">
   </div>`;
+}
 
+function getDexTypes(pokeData) {
   let pokeType = document.getElementById(`pokeType${pokeData["id"]}`);
-  let pokeTypes = pokeData["types"];
-  for (let i = 0; i < pokeTypes.length; i++) {
+  let types = pokeData["types"];
+  for (let i = 0; i < types.length; i++) {
     pokeType.innerHTML += /*html*/ `
-    <span>${pokeTypes[i]["type"]["name"]}</span>
+    <div class="dex-types">${types[i]["type"]["name"]}</div>
     `;
   }
 }
@@ -94,6 +101,7 @@ function getFullDex(pokeId) {
       fullDexContainer.classList.remove("d-none");
       fullDexImg.src = img;
       getFullDexColor(allPokemon[i]);
+      getFullDexName(allPokemon[i]);
       getFullDexType(allPokemon[i]);
       console.log(allPokemon[i]);
       getFullDexStatus(allPokemon[i]);
@@ -101,6 +109,12 @@ function getFullDex(pokeId) {
       getFullDexAbout(allPokemon[i]);
     }
   }
+}
+
+function getFullDexName(pokeData) {
+  let name = document.getElementById("full-dex-name");
+  let pokeName = pokeData["name"];
+  name.innerHTML = /*html*/ `${pokeName}`;
 }
 
 function getFullDexColor(pokeData) {
@@ -115,7 +129,7 @@ function getFullDexType(pokeData) {
   pokeTypes.forEach(function (index) {
     let type = index["type"]["name"];
     fullDexType.innerHTML += /*html*/ `
-    <div>${type}</div>
+    <div class="full-dex-types">${type}</div>
     `;
   });
 }
