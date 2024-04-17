@@ -23,27 +23,6 @@ function init() {
   fetchAllPokemon();
 }
 
-// function fetchAllPokemon() {
-//   let url = "https://pokeapi.co/api/v2/pokemon?limit=100";
-//   fetch(url)
-//     .then((response) => response.json())
-//     .then(function (allpokemon) {
-//       allpokemon.results.forEach(function (pokemon) {
-//         fetchPokemonData(pokemon);
-//       });
-//     });
-// }
-
-// function fetchPokemonData(pokemon) {
-//   let url = pokemon.url;
-//   fetch(url)
-//     .then((response) => response.json())
-//     .then(function (pokeData) {
-//       renderPokemon(pokeData);
-//       allPokemon.push(pokeData);
-//     });
-// }
-
 async function fetchAllPokemon() {
   let url = "https://pokeapi.co/api/v2/pokemon?limit=100";
   try {
@@ -65,7 +44,7 @@ async function fetchPokemonData(pokemon) {
     allPokemon.push(allpokemon);
     renderPokemon(allpokemon);
   } catch (e) {
-    console.log("again Fehler", e);
+    console.log("again Fehler");
   }
 }
 
@@ -81,17 +60,17 @@ function getDexPokemon(pokeData) {
     <div>
       <div id="pokeId"> #${pokeData["id"]}</div>
       <div id="pokeName"> ${pokeData["name"]}</div>
-      <div id="pokeType">${getPokeTypes(pokeData)}</div>
+      <div id="pokeType${pokeData["id"]}"></div>
     </div>
     <img id="pokeImg" src="${getPokeImage(pokeData)}" alt="">
   </div>`;
-}
 
-function getPokeTypes(pokeData) {
+  let pokeType = document.getElementById(`pokeType${pokeData["id"]}`);
   let pokeTypes = pokeData["types"];
   for (let i = 0; i < pokeTypes.length; i++) {
-    let types = pokeTypes[i]["type"]["name"];
-    return types;
+    pokeType.innerHTML += /*html*/ `
+    <span>${pokeTypes[i]["type"]["name"]}</span>
+    `;
   }
 }
 
@@ -109,9 +88,6 @@ function getPokeImage(pokeData) {
 function getFullDex(pokeId) {
   let fullDexContainer = document.getElementById("full-dex-container");
   let fullDexImg = document.getElementById("full-dex-img");
-  console.log(pokeId);
-  console.log(allPokemon);
-
   for (let i = 0; i < allPokemon.length; i++) {
     if (allPokemon[i]["id"] == pokeId) {
       let img = allPokemon[i]["sprites"]["other"]["dream_world"]["front_default"];
