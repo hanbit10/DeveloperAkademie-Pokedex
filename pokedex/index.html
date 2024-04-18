@@ -15,6 +15,7 @@
   </head>
   <body onload="init()">
     <header w3-include-html="/pokedex/components/header.html"></header>
+    <input type="text" id="search" onkeydown="filterNames()" />
     <div id="poke-dexes"></div>
     <div id="full-dex-container" class="full-dex-container d-none">
       <div id="full-dex">
@@ -37,6 +38,9 @@
 
       <div class="left-arrow-container no-select" id="leftArrow"></div>
       <div class="right-arrow-container no-select" id="rightArrow"></div>
+      <div class="close-container no-select">
+        <img class="close-btn no-select" onclick="closeFullScreen()" src="/pokedex/data/icons/iconxx.svg" alt="" />
+      </div>
     </div>
     <footer w3-include-html="/pokedex/components/footer.html"></footer>
 

@@ -83,7 +83,7 @@ function init() {
 }
 
 async function fetchAllPokemon() {
-  let url = "https://pokeapi.co/api/v2/pokemon?limit=10";
+  let url = "https://pokeapi.co/api/v2/pokemon?limit=100";
   try {
     let response = await fetch(url);
     let allpokemon = await response.json();
@@ -162,7 +162,7 @@ function getDexCardInfo(pokeId) {
       getFullDexColor(allPokemon[i]);
       getFullDexName(allPokemon[i]);
       getFullDexType(allPokemon[i]);
-      console.log(allPokemon[i]);
+      // console.log(allPokemon[i]);
       getFullDexAbilities(allPokemon[i]);
       getFullDexAbout(allPokemon[i]);
       getChart(allPokemon[i]);
@@ -231,7 +231,6 @@ function getFullDexAbout(pokeData) {
 }
 
 function openFullDex(pokeId) {
-  console.log(pokeId);
   if (1 > pokeId) {
     pokeId = 1;
   } else if (pokeId > allPokemon.length) {
@@ -269,6 +268,10 @@ function showRightFoto(index) {
 `;
 }
 
+function closeFullScreen() {
+  document.getElementById("full-dex-container").classList.add("d-none");
+}
+
 function getChart(pokeData) {
   const ctx = document.getElementById("myChart");
   const stats = getChartStats(pokeData);
@@ -287,4 +290,21 @@ function getChartStats(pokeData) {
     stats.push(pokeData["stats"][i]["base_stat"]);
   }
   return stats;
+}
+
+function filterNames() {
+  let search = document.getElementById("search").value;
+  let pokeDexes = document.getElementById("poke-dexes");
+  pokeDexes.innerHTML = "";
+  search = search.toLowerCase();
+  if (search.length >= 3) {
+    for (let i = 0; i < allPokemon.length; i++) {
+      let name = allPokemon[i]["name"];
+      if (name.toLowerCase().includes(search)) {
+        renderPokemon(allPokemon[i]);
+      }
+    }
+  } else {
+    allPokemon.forEach((pokemon) => renderPokemon(pokemon));
+  }
 }
