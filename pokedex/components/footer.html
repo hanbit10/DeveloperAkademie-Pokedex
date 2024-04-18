@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      footer {
+        height: 150px;
+        background-color: #ffffff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 1px solid rgb(143, 135, 135, 0.2);
+      }
+
+      footer {
+        padding-left: min(160px, 10%);
+        padding-right: min(160px, 10%);
+      }
+
+      .footer-logo-text {
+        font-size: 32px;
+        font-family: Quicksand, sans-serif;
+      }
+
+      .footer-img {
+        width: 32px;
+      }
+
+      .footer-social-logo {
+        margin: 8px;
+        width: 100%;
+        max-width: 48px;
+        min-width: 24px;
+      }
+
+      .footer-social-container {
+        display: flex;
+      }
+
+      .footer-logo {
+        display: flex;
+        align-items: center;
+        color: black;
+        text-decoration: none;
+        height: 50px;
+      }
+
+      .footer-impressum {
+        color: black;
+        text-decoration: none;
+      }
+
+      .footer-impressum:hover {
+        color: rgb(172, 172, 172);
+        text-decoration: underline;
+      }
+
+      .copy-right {
+        display: flex;
+      }
+
+      @media screen and (max-width: 550px) {
+        .copy-right {
+          flex-direction: column;
+        }
+
+        footer {
+          flex-direction: column;
+          padding-left: 10px;
+          padding-right: 10px;
+        }
+
+        .footer-img {
+          width: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <a href="/bitLieferando/index.html" class="footer-logo">
+        <img class="footer-img" src="/pokedex/data/icons/bitgramblack.svg" alt="" />
+        <div class="footer-logo-text">BITRANDO</div>
+      </a>
+
+      <div>
+        Copyright © 2024
+        <br />
+        <div class="copy-right">
+          <div>Site designed by&nbsp;</div>
+          <div>Hanbit Chang.</div>
+        </div>
+        App icons by <a href="https://fontawesome.com/">fontawesome</a>
+      </div>
+    </div>
+
+    <div class="footer-social-container">
+      <a class="footer-link" href="https://github.com/hanbit10">
+        <img class="footer-social-logo" src="/pokedex/data/icons/github.svg" alt=""
+      /></a>
+
+      <a class="footer-link" href="https://facebook.com/">
+        <img class="footer-social-logo" src="/pokedex/data/icons/facebook.svg" alt=""
+      /></a>
+
+      <a class="footer-link" href="https://www.instagram.com/">
+        <img class="footer-social-logo" src="/pokedex/data/icons/instagram.svg" alt=""
+      /></a>
+    </div>
+    <!-- <a class="footer-impressum" href="#">Impressum & Datenschutz</a> -->
+  </body>
+</html>

@@ -1,3 +1,17 @@
+async function includeHTML() {
+  let includeElements = document.querySelectorAll("[w3-include-html]");
+  for (let i = 0; i < includeElements.length; i++) {
+    const element = includeElements[i];
+    file = element.getAttribute("w3-include-html"); // "includes/header.html"
+    let resp = await fetch(file);
+    if (resp.ok) {
+      element.innerHTML = await resp.text();
+    } else {
+      element.innerHTML = "Page not found";
+    }
+  }
+}
+
 let allPokemonData;
 let pokemonData;
 const colorMap = {
@@ -26,7 +40,43 @@ const chartColor = [
   "rgba(153, 102, 255, 0.7)",
 ];
 
+let configuration = {
+  type: "bar",
+  data: {
+    labels: ["HP", "Attack", "Defense", "S. Attack", "S. Defense", "Speed"],
+    datasets: [
+      {
+        label: "Stats",
+        data: [],
+        backgroundColor: chartColor,
+        borderWidth: 1,
+        barThickness: 15,
+      },
+    ],
+  },
+  options: {
+    responsive: true,
+    scales: {
+      x: {
+        beginAtZero: true,
+        max: 200,
+        grid: {
+          display: false,
+          drawBorder: false,
+        },
+      },
+    },
+    indexAxis: "y",
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+  },
+};
+
 let allPokemon = [];
+let myChart;
 
 function init() {
   fetchAllPokemon();
@@ -70,7 +120,7 @@ function getDexPokemon(pokeData) {
 function getDexCard(pokeData) {
   let pokeDexes = document.getElementById("poke-dexes");
   pokeDexes.innerHTML += /*html*/ `
-  <div onclick='getFullDex(${pokeData["id"]})' id="pokeDex${pokeData["id"]}" class="pokeDex">
+  <div onclick='openFullDex(${pokeData["id"]})' id="pokeDex${pokeData["id"]}" class="pokeDex">
     <div>
       <div id="pokeId"> #${pokeData["id"]}</div>
       <div id="pokeName"> ${pokeData["name"]}</div>
@@ -101,7 +151,7 @@ function getPokeImage(pokeData) {
   return pokeDataImg;
 }
 
-function getFullDex(pokeId) {
+function getDexCardInfo(pokeId) {
   let fullDexContainer = document.getElementById("full-dex-container");
   let fullDexImg = document.getElementById("full-dex-img");
   for (let i = 0; i < allPokemon.length; i++) {
@@ -123,6 +173,7 @@ function getFullDex(pokeId) {
 function getFullDexName(pokeData) {
   let name = document.getElementById("full-dex-name");
   let pokeName = pokeData["name"];
+  name.innerHTML = "";
   name.innerHTML = /*html*/ `${pokeName}`;
 }
 
@@ -134,6 +185,7 @@ function getFullDexColor(pokeData) {
 
 function getFullDexType(pokeData) {
   let fullDexType = document.getElementById("full-dex-type");
+  fullDexType.innerHTML = "";
   let pokeTypes = pokeData["types"];
   pokeTypes.forEach(function (index) {
     let type = index["type"]["name"];
@@ -159,6 +211,7 @@ function getFullDexStatus(pokeData) {
 function getFullDexAbilities(pokeData) {
   let fullDexAbilities = document.getElementById("full-dex-abilities");
   let pokeAbilities = pokeData["abilities"];
+  fullDexAbilities.innerHTML = "Abilities: ";
   pokeAbilities.forEach(function (index) {
     let ability = index["ability"]["name"];
     fullDexAbilities.innerHTML += /*html*/ `
@@ -172,38 +225,66 @@ function getFullDexAbout(pokeData) {
   let pokeWeight = pokeData["weight"];
   let pokeHeight = pokeData["height"];
   fullDexAbout.innerHTML = /*html*/ `
-  <div>${pokeWeight}</div>
-  <div>${pokeHeight}</div>
+  <div class="about-text">Weight: ${pokeWeight}</div>
+  <div class="about-text">Height: ${pokeHeight}</div>
   `;
+}
+
+function openFullDex(pokeId) {
+  console.log(pokeId);
+  if (1 > pokeId) {
+    pokeId = 1;
+  } else if (pokeId > allPokemon.length) {
+    pokeId = allPokemon.length;
+  }
+
+  let leftArrow = document.getElementById("leftArrow");
+  let rightArrow = document.getElementById("rightArrow");
+  leftArrow.innerHTML = showLeftFoto(pokeId);
+  rightArrow.innerHTML = showRightFoto(pokeId);
+  getDexCardInfo(pokeId);
+}
+
+function showLeftFoto(index) {
+  return /*html*/ `
+  <div class="left-arrow-interface no-select" onclick='openFullDex(${index - 1})' >
+    <img
+      class="left-arrow no-select"
+      src="/pokedex/data/icons/leftArrow.svg"
+      alt=""
+    />
+  </div>
+`;
+}
+
+function showRightFoto(index) {
+  return /*html*/ `
+  <div class="right-arrow-interface no-select" onclick="openFullDex(${index + 1})" >
+    <img
+        class="right-arrow no-select"
+        src="/pokedex/data/icons/rightArrow.svg"
+        alt=""
+    />
+  </div>
+`;
 }
 
 function getChart(pokeData) {
   const ctx = document.getElementById("myChart");
+  const stats = getChartStats(pokeData);
+  configuration["data"]["datasets"][0]["data"] = stats;
+  if (myChart) {
+    myChart.destroy();
+    myChart = new Chart(ctx, configuration);
+  } else {
+    myChart = new Chart(ctx, configuration);
+  }
+}
+
+function getChartStats(pokeData) {
   let stats = [];
   for (let i = 0; i < pokeData["stats"].length; i++) {
     stats.push(pokeData["stats"][i]["base_stat"]);
   }
-  new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels: ["HP", "Attack", "Defense", "S. Attack", "S. Defense", "Speed"],
-      datasets: [
-        {
-          label: "Stats",
-          data: stats,
-          backgroundColor: chartColor,
-          borderWidth: 1,
-        },
-      ],
-    },
-    options: {
-      scales: {
-        x: {
-          beginAtZero: true,
-          max: 150,
-        },
-      },
-      indexAxis: "y",
-    },
-  });
+  return stats;
 }

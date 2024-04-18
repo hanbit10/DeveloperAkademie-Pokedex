@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      header {
+        position: relative;
+        background-color: #ffffff;
+        height: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom: 1px solid rgb(143, 135, 135, 0.2);
+      }
+
+      header {
+        padding-left: min(20px, 10%);
+        padding-right: min(20px, 10%);
+      }
+
+      .header-logo {
+        position: absolute;
+        left: 0px;
+        padding-left: min(20px, 10%);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-decoration: none;
+        color: black;
+      }
+
+      .header-logo-text {
+        font-size: 40px;
+        font-family: Quicksand, sans-serif;
+      }
+
+      .header-img {
+        width: 100%;
+        max-width: 40px;
+        max-height: 40px;
+        aspect-ratio: 1/1;
+      }
+
+      .flag {
+        position: absolute;
+        right: 0px;
+        padding-right: min(20px, 10%);
+        cursor: pointer;
+      }
+
+      .nav-menu {
+        margin-left: 10px;
+        width: 40px;
+        cursor: pointer;
+      }
+
+      .nav-menu:hover {
+        background-color: rgb(247, 247, 247);
+        border-radius: 50%;
+        /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+      }
+
+      @media screen and (max-width: 767px) {
+        .header-text {
+          display: none;
+        }
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <a href="/bitLieferando/index.html" class="header-logo">
+      <img class="header-img" src="/pokedex/data/icons/bitgramblack.svg" alt="" />
+      <div class="header-logo-text">BITPOKEDEX</div>
+    </a>
+  </body>
+</html>

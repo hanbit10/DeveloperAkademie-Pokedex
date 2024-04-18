@@ -14,6 +14,7 @@
     ></script>
   </head>
   <body onload="init()">
+    <header w3-include-html="/pokedex/components/header.html"></header>
     <div id="poke-dexes"></div>
     <div id="full-dex-container" class="full-dex-container d-none">
       <div id="full-dex">
@@ -22,16 +23,27 @@
         <div class="full-img-container">
           <img id="full-dex-img" src="" alt="" />
         </div>
-        <h2>Po</h2>
-        <div id="full-dex-status"></div>
-        <div id="full-dex-abilities"></div>
-        <div id="full-dex-about"></div>
-        <canvas id="myChart"></canvas>
+        <div class="stats-container">
+          <h2>Stats</h2>
+          <div class="abilities-container">
+            <div id="full-dex-abilities"></div>
+            <div id="full-dex-about"></div>
+          </div>
+          <div class="chart-container">
+            <canvas id="myChart"></canvas>
+          </div>
+        </div>
       </div>
+
+      <div class="left-arrow-container no-select" id="leftArrow"></div>
+      <div class="right-arrow-container no-select" id="rightArrow"></div>
     </div>
-    <div></div>
+    <footer w3-include-html="/pokedex/components/footer.html"></footer>
 
     <script src="./script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      includeHTML();
+    </script>
   </body>
 </html>
