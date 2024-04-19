@@ -115,7 +115,6 @@ async function fetchPokemon() {
 }
 
 async function fetchAllPokemon() {
-  // console.log(allPokemon.length);
   if (allPokemon.length >= 1025) {
   } else {
     for (let i = 1; i <= 1025; i++) {
@@ -266,7 +265,6 @@ function openFullDex(pokeId) {
   } else if (pokeId > allPokemon.length) {
     pokeId = allPokemon.length;
   }
-
   let leftArrow = document.getElementById("leftArrow");
   let rightArrow = document.getElementById("rightArrow");
   leftArrow.innerHTML = showLeftFoto(pokeId);
@@ -331,27 +329,19 @@ async function searchNames() {
   let loadBtn = document.getElementById("load-btn");
   loadBtn.classList.add("d-none");
   search = search.toLowerCase();
-  // console.log(allPokemon.length);
-  // console.log(search.length);
   if (search.length > 2) {
-    try {
-      for (let i = 0; i < 1025; i++) {
-        let name = allPokemon[i]["name"];
-        if (name.toLowerCase().includes(search)) {
-          fetchSearchPokemon(i);
-        }
+    for (let i = 0; i < 1025; i++) {
+      let name = allPokemon[i]["name"];
+      if (name.toLowerCase().includes(search)) {
+        fetchSearchPokemon(i);
       }
-    } catch (e) {}
+    }
   }
 }
 
 async function fetchSearchPokemon(index) {
   let url = `https://pokeapi.co/api/v2/pokemon/${index + 1}`;
-  try {
-    let response = await fetch(url);
-    let allpokemon = await response.json();
-    renderPokemon(allpokemon);
-  } catch (e) {
-    console.log("Fehler");
-  }
+  let response = await fetch(url);
+  let allpokemon = await response.json();
+  renderPokemon(allpokemon);
 }
