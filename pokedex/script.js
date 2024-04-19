@@ -80,20 +80,27 @@ let configuration = {
 };
 
 let allPokemon = [];
+let allNames = [];
 let myChart;
 let index1 = 0;
-let index2 = 20;
+let index2 = 40;
 
 async function init() {
-  await fetchAllPokemon();
+  fetchAllPokemon();
+  await fetchPokemon();
+}
 
-  for (let j = index1; j < allPokemon.length; j++) {
-    renderPokemon(allPokemon[j]);
+async function fetchPokemon() {
+  for (let i = index1 + 1; i <= index2; i++) {
+    let url = `https://pokeapi.co/api/v2/pokemon/${i}`;
+    let response = await fetch(url);
+    let pokemon = await response.json();
+    renderPokemon(pokemon);
   }
 }
 
 async function fetchAllPokemon() {
-  for (let i = index1 + 1; i <= index2; i++) {
+  for (let i = 1; i <= 1025; i++) {
     let url = `https://pokeapi.co/api/v2/pokemon/${i}`;
     let response = await fetch(url);
     let allpokemon = await response.json();
@@ -112,7 +119,7 @@ async function fetchLoadPokemon() {
   // index2 = allPokemon.length;
   // console.log(index1, index2);
   index1 = index2;
-  index2 = index2 + 20;
+  index2 = index2 + 40;
   console.log(index1, index2);
   await init();
 }
@@ -306,26 +313,28 @@ async function searchNames() {
   let pokeDexes = document.getElementById("poke-dexes");
   pokeDexes.innerHTML = "";
   search = search.toLowerCase();
-  if (search.length >= 2) {
-    for (let i = 0; i < allPokemon.length; i++) {
-      let name = allPokemon[i]["name"];
-      if (name.toLowerCase().includes(search)) {
-        renderPokemon(allPokemon[i]);
-        console.log(allPokemon[i]["id"]);
+  console.log(search.length);
+  if (search.length >= 3) {
+    try {
+      for (let i = 0; i < 1025; i++) {
+        let name = allPokemon[i]["name"];
+        if (name.toLowerCase().includes(search)) {
+          // renderPokemon(allPokemon[i]);
+          fetchSearchPokemon(i);
+          // console.log(allPokemon[i]["id"]);
+        }
       }
-    }
+    } catch (e) {}
   }
 }
 
-// async function fetchAllPokemon() {
-//   let url = "https://pokeapi.co/api/v2/pokemon?limit=20";
-//   try {
-//     let response = await fetch(url);
-//     let allpokemon = await response.json();
-//     allpokemon.results.forEach(function (pokemon) {
-//       fetchPokemonData(pokemon);
-//     });
-//   } catch (e) {
-//     console.log("Fehler");
-//   }
-// }
+async function fetchSearchPokemon(index) {
+  let url = `https://pokeapi.co/api/v2/pokemon/${index + 1}`;
+  try {
+    let response = await fetch(url);
+    let allpokemon = await response.json();
+    renderPokemon(allpokemon);
+  } catch (e) {
+    console.log("Fehler");
+  }
+}
