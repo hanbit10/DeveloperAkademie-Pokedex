@@ -6,16 +6,13 @@
 
     <title>Document</title>
     <link rel="stylesheet" href="./style.css" />
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"
-      integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
   </head>
   <body onload="init()">
     <header w3-include-html="/pokedex/components/header.html"></header>
-    <input type="text" id="search" onkeydown="filterNames()" />
+    <section class="search-section">
+      <input type="text" id="search" onkeydown="filterNames()" placeholder="Search Your Pokemon!" />
+    </section>
+
     <div id="poke-dexes"></div>
     <div id="full-dex-container" class="full-dex-container d-none">
       <div id="full-dex">
@@ -44,8 +41,16 @@
     </div>
     <footer w3-include-html="/pokedex/components/footer.html"></footer>
 
+    <script
+      type="module"
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"
+      integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="./script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <script>
       includeHTML();
     </script>

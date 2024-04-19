@@ -83,7 +83,7 @@ function init() {
 }
 
 async function fetchAllPokemon() {
-  let url = "https://pokeapi.co/api/v2/pokemon?limit=100";
+  let url = "https://pokeapi.co/api/v2/pokemon?limit=40";
   try {
     let response = await fetch(url);
     let allpokemon = await response.json();
@@ -162,7 +162,6 @@ function getDexCardInfo(pokeId) {
       getFullDexColor(allPokemon[i]);
       getFullDexName(allPokemon[i]);
       getFullDexType(allPokemon[i]);
-      // console.log(allPokemon[i]);
       getFullDexAbilities(allPokemon[i]);
       getFullDexAbout(allPokemon[i]);
       getChart(allPokemon[i]);
@@ -298,6 +297,7 @@ function filterNames() {
   pokeDexes.innerHTML = "";
   search = search.toLowerCase();
   if (search.length >= 3) {
+    allPokemon.length;
     for (let i = 0; i < allPokemon.length; i++) {
       let name = allPokemon[i]["name"];
       if (name.toLowerCase().includes(search)) {
