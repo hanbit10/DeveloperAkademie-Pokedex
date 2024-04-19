@@ -81,48 +81,40 @@ let configuration = {
 
 let allPokemon = [];
 let myChart;
+let index1 = 0;
+let index2 = 20;
 
 async function init() {
   await fetchAllPokemon();
-  for (let j = 0; j < allPokemon.length; j++) {
+
+  for (let j = index1; j < allPokemon.length; j++) {
     renderPokemon(allPokemon[j]);
   }
 }
 
 async function fetchAllPokemon() {
-  for (let i = 1; i <= 20; i++) {
+  for (let i = index1 + 1; i <= index2; i++) {
     let url = `https://pokeapi.co/api/v2/pokemon/${i}`;
-
     let response = await fetch(url);
     let allpokemon = await response.json();
     allPokemon.push(allpokemon);
-    // allpokemon.results.forEach(function (pokemon) {
-    //   fetchPokemonData(pokemon);
-    // });
   }
 }
 
-// async function fetchPokemonData(pokemon) {
-//   let url = pokemon.url;
-//   try {
-//     let response = await fetch(url);
-//     let allpokemon = await response.json();
-//     allPokemon.push(allpokemon);
-//   } catch (e) {
-//     console.log("again Fehler");
-//   }
-// }
-
 async function fetchLoadPokemon() {
-  let url = "https://pokeapi.co/api/v2/pokemon?offset=" + allPokemon.length + "&limit=20";
-  let response = await fetch(url);
-  let allpokemon = await response.json();
-  allpokemon.results.forEach(function (pokemon) {
-    allPokemon.push(pokemon);
-    console.log(pokemon);
-  });
-
-  console.log(allPokemon);
+  // let url = "https://pokeapi.co/api/v2/pokemon?offset=" + allPokemon.length + "&limit=20";
+  // let response = await fetch(url);
+  // let allpokemon = await response.json();
+  // index1 = index2 + 1;
+  // for (let i = 0; i < 20; i++) {
+  //   allPokemon.push(allpokemon);
+  // }
+  // index2 = allPokemon.length;
+  // console.log(index1, index2);
+  index1 = index2;
+  index2 = index2 + 20;
+  console.log(index1, index2);
+  await init();
 }
 
 function renderPokemon(pokeData) {
