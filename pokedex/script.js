@@ -15,20 +15,24 @@ async function includeHTML() {
 let allPokemonData;
 let pokemonData;
 const colorMap = {
-  fire: "#f7786b",
-  fighting: "#f7786b",
-  water: "#58abf6",
-  grass: "#49d0b0",
-  bug: "#49d0b0",
-  psychic: "#9f5bba",
-  poison: "#9f5bba",
-  electric: "#ffce4b",
-  normal: "#808080",
-  ghost: "#808080",
-  fairy: "#808080",
-  steel: "#808080",
-  rock: "#ca8179",
-  ground: "#ca8179",
+  normal: "#A8A77A",
+  fire: "#EE8130",
+  water: "#6390F0",
+  electric: "#F7D02C",
+  grass: "#7AC74C",
+  ice: "#96D9D6",
+  fighting: "#C22E28",
+  poison: "#A33EA1",
+  ground: "#E2BF65",
+  flying: "#A98FF3",
+  psychic: "#F95587",
+  bug: "#A6B91A",
+  rock: "#B6A136",
+  ghost: "#735797",
+  dragon: "#6F35FC",
+  dark: "#705746",
+  steel: "#B7B7CE",
+  fairy: "#D685AD",
 };
 
 const chartColor = [
@@ -78,33 +82,47 @@ let configuration = {
 let allPokemon = [];
 let myChart;
 
-function init() {
-  fetchAllPokemon();
+async function init() {
+  await fetchAllPokemon();
+  for (let j = 0; j < allPokemon.length; j++) {
+    renderPokemon(allPokemon[j]);
+  }
 }
 
 async function fetchAllPokemon() {
-  let url = "https://pokeapi.co/api/v2/pokemon?limit=40";
-  try {
-    let response = await fetch(url);
-    let allpokemon = await response.json();
-    allpokemon.results.forEach(function (pokemon) {
-      fetchPokemonData(pokemon);
-    });
-  } catch (e) {
-    console.log("Fehler");
-  }
-}
+  for (let i = 1; i <= 20; i++) {
+    let url = `https://pokeapi.co/api/v2/pokemon/${i}`;
 
-async function fetchPokemonData(pokemon) {
-  let url = pokemon.url;
-  try {
     let response = await fetch(url);
     let allpokemon = await response.json();
     allPokemon.push(allpokemon);
-    renderPokemon(allpokemon);
-  } catch (e) {
-    console.log("again Fehler");
+    // allpokemon.results.forEach(function (pokemon) {
+    //   fetchPokemonData(pokemon);
+    // });
   }
+}
+
+// async function fetchPokemonData(pokemon) {
+//   let url = pokemon.url;
+//   try {
+//     let response = await fetch(url);
+//     let allpokemon = await response.json();
+//     allPokemon.push(allpokemon);
+//   } catch (e) {
+//     console.log("again Fehler");
+//   }
+// }
+
+async function fetchLoadPokemon() {
+  let url = "https://pokeapi.co/api/v2/pokemon?offset=" + allPokemon.length + "&limit=20";
+  let response = await fetch(url);
+  let allpokemon = await response.json();
+  allpokemon.results.forEach(function (pokemon) {
+    allPokemon.push(pokemon);
+    console.log(pokemon);
+  });
+
+  console.log(allPokemon);
 }
 
 function renderPokemon(pokeData) {
@@ -291,20 +309,31 @@ function getChartStats(pokeData) {
   return stats;
 }
 
-function filterNames() {
+async function searchNames() {
   let search = document.getElementById("search").value;
   let pokeDexes = document.getElementById("poke-dexes");
   pokeDexes.innerHTML = "";
   search = search.toLowerCase();
-  if (search.length >= 3) {
-    allPokemon.length;
+  if (search.length >= 2) {
     for (let i = 0; i < allPokemon.length; i++) {
       let name = allPokemon[i]["name"];
       if (name.toLowerCase().includes(search)) {
         renderPokemon(allPokemon[i]);
+        console.log(allPokemon[i]["id"]);
       }
     }
-  } else {
-    allPokemon.forEach((pokemon) => renderPokemon(pokemon));
   }
 }
+
+// async function fetchAllPokemon() {
+//   let url = "https://pokeapi.co/api/v2/pokemon?limit=20";
+//   try {
+//     let response = await fetch(url);
+//     let allpokemon = await response.json();
+//     allpokemon.results.forEach(function (pokemon) {
+//       fetchPokemonData(pokemon);
+//     });
+//   } catch (e) {
+//     console.log("Fehler");
+//   }
+// }
