@@ -3,20 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>Document</title>
+    <link rel="icon" type="image/x-icon" href="/pokedex/data/imgs/pokeball.png" />
+    <title>BITPOKEDEX</title>
     <link rel="stylesheet" href="./style.css" />
   </head>
-  <body onload="init()">
+  <body id="body" onload="init()">
     <header w3-include-html="/pokedex/components/header.html"></header>
     <section class="search-section">
-      <input type="text" id="search" onkeydown="searchNames()" placeholder="Search Your Pokemon!" />
+      <input type="text" id="search" onkeydown="searchNames()" placeholder="Search Your Pokémon!" />
     </section>
     <section class="poke-dexes-container">
       <div id="poke-dexes"></div>
       <div class="poke-dexes-btn-container">
-        <button id="load-btn" class="poke-dexes-btn" onclick="fetchLoadPokemon()">Load More</button>
-        <button id="reload-btn" class="poke-dexes-btn" onclick="reload()">Reload</button>
+        <div id="load-btn" class="poke-dexes-btn" onclick="fetchLoadPokemon()">
+          <img src="/pokedex/data/icons/plus-solid.svg" alt="" />
+          <div class="poke-dexes-btn-text">Load More</div>
+        </div>
+        <div id="reload-btn" class="poke-dexes-btn" onclick="reload()">
+          <img src="/pokedex/data/icons/rotate-right-solid.svg" alt="" />
+          <div class="poke-dexes-btn-text">Reload</div>
+        </div>
       </div>
     </section>
 
@@ -46,7 +52,7 @@
       <div class="left-arrow-container no-select" id="leftArrow"></div>
       <div class="right-arrow-container no-select" id="rightArrow"></div>
       <div class="close-container no-select">
-        <img class="close-btn no-select" onclick="closeFullScreen()" src="/pokedex/data/icons/iconxx.svg" alt="" />
+        <img class="close-btn no-select" onclick="closeFullScreen()" src="/pokedex/data/icons/xmark-solid.svg" alt="" />
       </div>
     </section>
 

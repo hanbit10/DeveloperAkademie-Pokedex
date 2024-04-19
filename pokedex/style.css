@@ -20,7 +20,9 @@ body {
 
 #search {
   width: 300px;
-  padding: 8px;
+  padding: 16px;
+  font-size: 20px;
+  border-radius: 30px;
 }
 
 #poke-dexes {
@@ -32,12 +34,40 @@ body {
 .poke-dexes-container {
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .poke-dexes-btn {
   width: 200px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.poke-dexes-btn img {
+  width: 100px;
+  aspect-ratio: 1/1;
+  box-shadow: rgb(255, 255, 255) 0px 0px 1px 2px, rgb(255, 255, 255) 0px 4px 6px -1px, rgba(119, 119, 119, 0.08) 0px 1px 0px inset;
+  border-radius: 50%;
+  padding: 20px;
+  overflow: visible;
+}
+
+.poke-dexes-btn img:hover {
+  box-shadow: rgba(255, 255, 255, 0.692) 0px 0px 4px 6px, rgb(255, 255, 255) 0px 5px 7px -1px, rgba(119, 119, 119, 0.08) 0px 1px 0px inset;
+}
+
+.poke-dexes-btn-text {
+  margin: 32px;
+  margin-bottom: 32px;
+  color: white;
+}
+
+.poke-dexes-btn:hover {
+  text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.8);
 }
 
 .poke-dexes-btn-container {
@@ -46,7 +76,7 @@ body {
   justify-content: center;
 }
 
-.pokeDex {
+.poke-dex {
   position: relative;
   width: 280px;
   height: 200px;
@@ -58,6 +88,10 @@ body {
   margin: 8px;
   border-radius: 15px;
   cursor: pointer;
+}
+
+.poke-dex:hover {
+  box-shadow: rgba(255, 255, 255, 0.692) 0px 0px 4px 6px, rgb(255, 255, 255) 0px 5px 7px -1px, rgba(119, 119, 119, 0.08) 0px 1px 0px inset;
 }
 
 #pokeImg {
@@ -234,6 +268,10 @@ body {
 
 .d-none {
   display: none;
+}
+
+.of-hidden {
+  overflow-y: hidden;
 }
 
 @media screen and (max-width: 767px) {

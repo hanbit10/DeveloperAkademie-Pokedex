@@ -86,9 +86,14 @@ let index1 = 0;
 let index2 = 40;
 
 function reload() {
+  let search = document.getElementById("search");
+  search.value;
+  console.log(search.value);
+  search.value = "";
   let pokeDexes = document.getElementById("poke-dexes");
-  pokeDexes.innerHTML = "";
   let loadBtn = document.getElementById("load-btn");
+
+  pokeDexes.innerHTML = "";
   loadBtn.classList.remove("d-none");
   index1 = 0;
   index2 = 40;
@@ -141,7 +146,7 @@ function getDexPokemon(pokeData) {
 function getDexCard(pokeData) {
   let pokeDexes = document.getElementById("poke-dexes");
   pokeDexes.innerHTML += /*html*/ `
-  <div onclick='openFullDex(${pokeData["id"]})' id="pokeDex${pokeData["id"]}" class="pokeDex">
+  <div onclick='openFullDex(${pokeData["id"]})' id="pokeDex${pokeData["id"]}" class="poke-dex">
     <div>
       <div id="pokeId"> #${pokeData["id"]}</div>
       <div id="pokeName"> ${pokeData["name"]}</div>
@@ -254,6 +259,8 @@ function getFullDexAbout(pokeData) {
 }
 
 function openFullDex(pokeId) {
+  let bg = document.getElementById("body");
+  bg.classList.add("of-hidden");
   if (1 > pokeId) {
     pokeId = 1;
   } else if (pokeId > allPokemon.length) {
@@ -293,6 +300,8 @@ function showRightFoto(index) {
 
 function closeFullScreen() {
   document.getElementById("full-dex-container").classList.add("d-none");
+  let bg = document.getElementById("body");
+  bg.classList.remove("of-hidden");
 }
 
 function getChart(pokeData) {
@@ -324,7 +333,7 @@ async function searchNames() {
   search = search.toLowerCase();
   // console.log(allPokemon.length);
   // console.log(search.length);
-  if (search.length >= 3) {
+  if (search.length > 2) {
     try {
       for (let i = 0; i < 1025; i++) {
         let name = allPokemon[i]["name"];
