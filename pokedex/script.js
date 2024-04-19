@@ -85,6 +85,16 @@ let myChart;
 let index1 = 0;
 let index2 = 40;
 
+function reload() {
+  let pokeDexes = document.getElementById("poke-dexes");
+  pokeDexes.innerHTML = "";
+  let loadBtn = document.getElementById("load-btn");
+  loadBtn.classList.remove("d-none");
+  index1 = 0;
+  index2 = 40;
+  init();
+}
+
 async function init() {
   fetchAllPokemon();
   await fetchPokemon();
@@ -100,11 +110,15 @@ async function fetchPokemon() {
 }
 
 async function fetchAllPokemon() {
-  for (let i = 1; i <= 1025; i++) {
-    let url = `https://pokeapi.co/api/v2/pokemon/${i}`;
-    let response = await fetch(url);
-    let allpokemon = await response.json();
-    allPokemon.push(allpokemon);
+  console.log(allPokemon.length);
+  if (allPokemon.length >= 1025) {
+  } else {
+    for (let i = 1; i <= 1025; i++) {
+      let url = `https://pokeapi.co/api/v2/pokemon/${i}`;
+      let response = await fetch(url);
+      let allpokemon = await response.json();
+      allPokemon.push(allpokemon);
+    }
   }
 }
 
@@ -164,7 +178,7 @@ function getDexColor(pokeData) {
 }
 
 function getPokeImage(pokeData) {
-  let pokeDataImg = pokeData["sprites"]["other"]["dream_world"]["front_default"];
+  let pokeDataImg = pokeData["sprites"]["other"]["official-artwork"]["front_default"];
   return pokeDataImg;
 }
 
@@ -173,7 +187,7 @@ function getDexCardInfo(pokeId) {
   let fullDexImg = document.getElementById("full-dex-img");
   for (let i = 0; i < allPokemon.length; i++) {
     if (allPokemon[i]["id"] == pokeId) {
-      let img = allPokemon[i]["sprites"]["other"]["dream_world"]["front_default"];
+      let img = allPokemon[i]["sprites"]["other"]["official-artwork"]["front_default"];
       fullDexContainer.classList.remove("d-none");
       fullDexImg.src = img;
       getFullDexColor(allPokemon[i]);
@@ -312,7 +326,10 @@ async function searchNames() {
   let search = document.getElementById("search").value;
   let pokeDexes = document.getElementById("poke-dexes");
   pokeDexes.innerHTML = "";
+  let loadBtn = document.getElementById("load-btn");
+  loadBtn.classList.add("d-none");
   search = search.toLowerCase();
+  console.log(allPokemon.length);
   console.log(search.length);
   if (search.length >= 3) {
     try {

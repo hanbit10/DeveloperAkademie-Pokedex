@@ -24,8 +24,17 @@ body {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+.poke-dexes-container {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
   height: 100vh;
-  overflow: scroll;
+}
+
+.poke-dexes-btn {
+  width: 200px;
 }
 
 .pokeDex {

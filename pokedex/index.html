@@ -12,9 +12,12 @@
     <section class="search-section">
       <input type="text" id="search" onkeydown="searchNames()" placeholder="Search Your Pokemon!" />
     </section>
+    <div class="poke-dexes-container">
+      <div id="poke-dexes"></div>
+      <button id="load-btn" class="poke-dexes-btn" onclick="fetchLoadPokemon()">Load More</button>
+      <button id="reload-btn" class="poke-dexes-btn" onclick="reload()">Reload</button>
+    </div>
 
-    <div id="poke-dexes"></div>
-    <div id="poke-search-dexes"></div>
     <div id="full-dex-container" class="full-dex-container d-none">
       <div id="full-dex">
         <div id="full-dex-name"></div>
@@ -40,7 +43,7 @@
         <img class="close-btn no-select" onclick="closeFullScreen()" src="/pokedex/data/icons/iconxx.svg" alt="" />
       </div>
     </div>
-    <button onclick="fetchLoadPokemon()">Load More</button>
+
     <footer w3-include-html="/pokedex/components/footer.html"></footer>
 
     <script type="module" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
