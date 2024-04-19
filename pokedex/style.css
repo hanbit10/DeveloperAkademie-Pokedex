@@ -3,6 +3,11 @@
   src: url(/pokedex/data/fonts/Raleway-Bold.ttf);
 }
 
+@font-face {
+  font-family: Raleway;
+  src: url(/pokedex/data/fonts/Raleway-Regular.ttf);
+}
+
 body {
   position: relative;
   margin: 0;
@@ -186,6 +191,16 @@ body {
 
 #full-dex-about {
   padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.about-text {
+  display: flex;
+}
+
+.text-value {
+  font-family: Raleway;
 }
 
 .abilities-container {

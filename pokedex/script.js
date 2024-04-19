@@ -243,7 +243,7 @@ function getFullDexAbilities(pokeData) {
   pokeAbilities.forEach(function (index) {
     let ability = index["ability"]["name"];
     fullDexAbilities.innerHTML += /*html*/ `
-    <div>${ability}</div>
+    <div class="text-value" >${ability}</div>
     `;
   });
 }
@@ -253,8 +253,8 @@ function getFullDexAbout(pokeData) {
   let pokeWeight = pokeData["weight"];
   let pokeHeight = pokeData["height"];
   fullDexAbout.innerHTML = /*html*/ `
-  <div class="about-text">Weight: ${pokeWeight}</div>
-  <div class="about-text">Height: ${pokeHeight}</div>
+  <div class="about-text">Weight:<div class="text-value">&nbsp ${pokeWeight}</div></div>
+  <div class="about-text">Height:<div class="text-value">&nbsp ${pokeHeight}</div></div>
   `;
 }
 
