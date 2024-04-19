@@ -12,13 +12,15 @@
     <section class="search-section">
       <input type="text" id="search" onkeydown="searchNames()" placeholder="Search Your Pokemon!" />
     </section>
-    <div class="poke-dexes-container">
+    <section class="poke-dexes-container">
       <div id="poke-dexes"></div>
-      <button id="load-btn" class="poke-dexes-btn" onclick="fetchLoadPokemon()">Load More</button>
-      <button id="reload-btn" class="poke-dexes-btn" onclick="reload()">Reload</button>
-    </div>
+      <div class="poke-dexes-btn-container">
+        <button id="load-btn" class="poke-dexes-btn" onclick="fetchLoadPokemon()">Load More</button>
+        <button id="reload-btn" class="poke-dexes-btn" onclick="reload()">Reload</button>
+      </div>
+    </section>
 
-    <div id="full-dex-container" class="full-dex-container d-none">
+    <section id="full-dex-container" class="full-dex-container d-none">
       <div id="full-dex">
         <div class="full-dex-title">
           <div id="full-dex-id"></div>
@@ -46,7 +48,7 @@
       <div class="close-container no-select">
         <img class="close-btn no-select" onclick="closeFullScreen()" src="/pokedex/data/icons/iconxx.svg" alt="" />
       </div>
-    </div>
+    </section>
 
     <footer w3-include-html="/pokedex/components/footer.html"></footer>
 
