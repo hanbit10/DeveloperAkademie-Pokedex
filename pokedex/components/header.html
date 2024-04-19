@@ -62,8 +62,38 @@
       }
 
       @media screen and (max-width: 767px) {
+        header {
+          height: 150px;
+        }
         .header-text {
           display: none;
+        }
+
+        .header-img {
+          width: 100%;
+          max-width: 100px;
+        }
+
+        .header-logo-text {
+          font-size: 50px;
+        }
+
+        @media screen and (max-width: 480px) {
+          header {
+            height: 100px;
+          }
+          .header-text {
+            display: none;
+          }
+
+          .header-img {
+            width: 100%;
+            max-width: 50px;
+          }
+
+          .header-logo-text {
+            font-size: 30px;
+          }
         }
       }
     </style>
