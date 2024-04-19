@@ -110,7 +110,7 @@ async function fetchPokemon() {
 }
 
 async function fetchAllPokemon() {
-  console.log(allPokemon.length);
+  // console.log(allPokemon.length);
   if (allPokemon.length >= 1025) {
   } else {
     for (let i = 1; i <= 1025; i++) {
@@ -123,18 +123,8 @@ async function fetchAllPokemon() {
 }
 
 async function fetchLoadPokemon() {
-  // let url = "https://pokeapi.co/api/v2/pokemon?offset=" + allPokemon.length + "&limit=20";
-  // let response = await fetch(url);
-  // let allpokemon = await response.json();
-  // index1 = index2 + 1;
-  // for (let i = 0; i < 20; i++) {
-  //   allPokemon.push(allpokemon);
-  // }
-  // index2 = allPokemon.length;
-  // console.log(index1, index2);
   index1 = index2;
   index2 = index2 + 40;
-  console.log(index1, index2);
   await init();
 }
 
@@ -202,9 +192,12 @@ function getDexCardInfo(pokeId) {
 
 function getFullDexName(pokeData) {
   let name = document.getElementById("full-dex-name");
-  let pokeName = pokeData["name"];
+  let id = document.getElementById("full-dex-id");
+
   name.innerHTML = "";
-  name.innerHTML = /*html*/ `${pokeName}`;
+  name.innerHTML = /*html*/ `${pokeData["name"]}`;
+  id.innerHTML = "";
+  id.innerHTML = `#${pokeData["id"]}`;
 }
 
 function getFullDexColor(pokeData) {
@@ -329,16 +322,14 @@ async function searchNames() {
   let loadBtn = document.getElementById("load-btn");
   loadBtn.classList.add("d-none");
   search = search.toLowerCase();
-  console.log(allPokemon.length);
-  console.log(search.length);
+  // console.log(allPokemon.length);
+  // console.log(search.length);
   if (search.length >= 3) {
     try {
       for (let i = 0; i < 1025; i++) {
         let name = allPokemon[i]["name"];
         if (name.toLowerCase().includes(search)) {
-          // renderPokemon(allPokemon[i]);
           fetchSearchPokemon(i);
-          // console.log(allPokemon[i]["id"]);
         }
       }
     } catch (e) {}

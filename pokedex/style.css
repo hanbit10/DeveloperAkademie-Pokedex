@@ -100,12 +100,20 @@ body {
   border-radius: 30px;
 }
 
-#full-dex-name {
-  color: rgb(255, 255, 255);
+.full-dex-title {
   display: flex;
   justify-content: center;
-  padding: 8px;
+  color: rgb(255, 255, 255);
   font-size: 32px;
+}
+
+#full-dex-name {
+  padding: 8px;
+}
+
+#full-dex-id {
+  padding: 8px;
+  font-style: italic;
 }
 
 #full-dex-type {
